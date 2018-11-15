@@ -1,0 +1,1 @@
+database_uri = "mysql+pymysql://b2bfee3d6276cf:4afb5aa1@us-cdbr-iron-east-01.cleardb.net/heroku_6a8aebaa6bd1fd4"
