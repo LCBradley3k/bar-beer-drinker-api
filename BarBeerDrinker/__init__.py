@@ -2,11 +2,13 @@ from flask import Flask
 from flask import jsonify
 from flask import make_response
 from flask import request
+from flask_cors import CORS
 import json
 
 from BarBeerDrinker import database
 
 app = Flask(__name__)
+CORS(app)
 
 #specifies API request for our URL, the HTTP method (what type of request)
 @app.route('/api/bar', methods=["GET"])
