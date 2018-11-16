@@ -83,7 +83,7 @@ def find_top_spenders(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-@app.route("/api/transactions", methods=["GET"])
+@app.route("/api/transactions/<name>", methods=["GET"])
 def find_transaction(name):
     try:
         if name is None:
