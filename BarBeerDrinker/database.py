@@ -28,7 +28,7 @@ def get_items():
 def find_transaction(name):
     with engine.connect() as con:
         query = sql.text(
-            "SELECT orders.transaction_id, orders.name, orders.bar_name, transactions.date, transactions.time FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.name = :name ORDER BY transactions.date,  transactions.time, orders.bar_name;"
+            "SELECT orders.transaction_id, orders.name, orders.bar_name, transactions.date, transactions.time FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.name = :name ORDER BY transactions.date, transactions.time, orders.bar_name;"
         )
         rs = con.execute(query, name=name)
         result = [dict(row) for row in rs]
