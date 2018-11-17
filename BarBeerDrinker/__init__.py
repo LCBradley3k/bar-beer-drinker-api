@@ -69,7 +69,7 @@ def find_item(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-@app.route("/api/top-spenders-by-bar", methods=["GET"])
+@app.route("/api/top-spenders-by-bar/<name>", methods=["GET"])
 def find_top_spenders(name):
     try:
         if name is None:
@@ -97,7 +97,7 @@ def find_transaction(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-@app.route("/api/top-items-by-bar", methods=["GET"])
+@app.route("/api/top-items-by-bar/<name>", methods=["GET"])
 def find_top_items(name):
     try:
         if name is None:
@@ -111,7 +111,7 @@ def find_top_items(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-@app.route("/api/top-items-by-drinker", methods=["GET"])
+@app.route("/api/top-items-by-drinker/<name>", methods=["GET"])
 def find_top_bought(name):
     try:
         if name is None:
@@ -125,7 +125,7 @@ def find_top_bought(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-@app.route("/api/top-manufacturers-by-bar", methods=["GET"])
+@app.route("/api/top-manufacturers-by-bar/<name>", methods=["GET"])
 def find_top_manf(name):
     try:
         if name is None:
@@ -139,7 +139,7 @@ def find_top_manf(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-@app.route("/api/top-bars-by-beer", methods=["GET"])
+@app.route("/api/top-bars-by-beer/<name>", methods=["GET"])
 def find_top_bars(name):
     try:
         if name is None:
@@ -153,7 +153,7 @@ def find_top_bars(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-@app.route("/api/top-drinkers-by-beer", methods=["GET"])
+@app.route("/api/top-drinkers-by-beer/<name>", methods=["GET"])
 def find_top_drinkers(name):
     try:
         if name is None:
