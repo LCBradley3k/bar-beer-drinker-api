@@ -181,7 +181,7 @@ def find_drinker_bars_per_hour(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-@app.route("/api/find-beer_sales_per_month/<name>", methods=["GET"])
+@app.route("/api/find-beer-sales-per-month/<name>", methods=["GET"])
 def find_beer_sales_per_month(name):
     try:
         if name is None:
