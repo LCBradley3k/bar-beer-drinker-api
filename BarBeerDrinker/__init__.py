@@ -211,6 +211,13 @@ def find_bar_sales_per_hour(name):
     except Exception as e:
         return make_response(str(e), 500)
 
+@app.route("/api/verify_times", methods=["GET"])
+def verify_times():
+    return jsonify(database.verify_times())
+
+@app.route("/api/verify_states", methods=["GET"])
+def verify_states():
+    return jsonify(database.verify_states())
 
 #find beers cheaper than given number
 #used when getting input from user

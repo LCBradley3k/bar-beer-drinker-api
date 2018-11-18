@@ -185,6 +185,21 @@ def find_bar_sales_per_hour(name):
                  #       r['total'] = float(r['total'])
                 return results
 
+# verify that there is no transactions outside of opening and closing times
+def verify_times():
+        with engine.connect() as con:
+                query = sql.text("SELECT NOT EXISTS (SELECT * FROM (SELECT DISTINCT(transactions.Transaction_ID), CAST(opening_hour AS TIME) as opening_hour, CAST(transactions.time as TIME) as transaction_time, CAST(closing_hour AS TIME) as closing_hour FROM transactions RIGHT JOIN orders ON transactions.Transaction_ID = orders.transaction_ID JOIN bars ON orders.Bar_name = bars.Name LIMIT 1000) A WHERE A.transaction_time BETWEEN opening_hour AND closing_hour) AS CheckTimes;")
+                rs = con.execute(query)
+                results = [dict(row) for row in rs]
+                return results
+
+def verify_states():
+        with engine.connect() as con:
+                query = sql.text("SELECT NOT EXISTS(SELECT frequents.name, frequents.bar, bars.state, drinkers.state FROM frequents Inner Join drinkers on frequents.name = drinkers.name Inner Join bars on frequents.bar = bars.name WHERE drinkers.state <> bars.state) AS CheckStates;")
+                rs = con.execute(query)
+                results = [dict(row) for row in rs]
+                return results
+
 #just name example, have to edit to fit our needs
 def filter_beers(max_price):
         with engine.connect() as con:
