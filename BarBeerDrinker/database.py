@@ -181,8 +181,8 @@ def find_bar_sales_per_hour(name):
                 )
                 rs = con.execute(query, name=name)
                 results = [dict(row) for row in rs]
-                for r in results:
-                        r['total'] = float(r['total'])
+                #for r in results:
+                 #       r['total'] = float(r['total'])
                 return results
 
 #just name example, have to edit to fit our needs
