@@ -153,14 +153,14 @@ def find_top_drinkers(name):
 # distribution of drinkers at bar per hour
 def find_drinker_bars_per_hour(name):
         with engine.connect() as con:
-                query = sql.text(
-                        "SELECT month, transaction_id, name, bar_name, MAX(total_per_month) as total_per_month FROM ( SELECT EXTRACT(MONTH FROM date) as month, orders.transaction_id, orders.name, orders.bar_name, SUM(total) as total_per_month FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.name = :name GROUP BY month, orders.bar_name ORDER BY month, transactions.date,  transactions.time) A GROUP BY month;")
-
-                rs = con.execute(query, name=name)
-                results = [dict(row) for row in rs]
-                for r in results:
-                        r['total_per_month'] = float(r['total_per_month'])
-                return results
+                query = sql.text(
+                        "SELECT month, transaction_id, name, bar_name, MAX(total_per_month) as total_per_month FROM ( SELECT EXTRACT(MONTH FROM date) as month, orders.transaction_id, orders.name, orders.bar_name, SUM(total) as total_per_month FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.name = :name GROUP BY month, orders.bar_name ORDER BY month, transactions.date,  transactions.time) A GROUP BY month;"
+                )
+                rs = con.execute(query, name=name)
+                results = [dict(row) for row in rs]
+                for r in results:
+                        r['total_per_month'] = float(r['total_per_month'])
+                return results
 
 #just name example, have to edit to fit our needs
 def filter_beers(max_price):
