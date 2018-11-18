@@ -197,6 +197,20 @@ def find_beer_sales_per_month(name):
     except Exception as e:
         return make_response(str(e), 500)
 
+@app.route("/api/top-bar-sales-per-hour/<name>", methods=["GET"])
+def find_bar_sales_per_hour(name):
+    try:
+        if name is None:
+            raise ValueError("Bar is not specified.")
+        top_sales = database.find_bar_sales_per_hour(name)
+        if top_sales is None:
+            return make_response("No bar found with the given name.", 404)
+        return jsonify(top_sales)
+    except ValueError as e:
+        return make_response(str(e), 400)
+    except Exception as e:
+        return make_response(str(e), 500)
+
 
 #find beers cheaper than given number
 #used when getting input from user
