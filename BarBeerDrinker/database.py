@@ -177,7 +177,7 @@ def find_beer_sales_per_month(name):
 def find_bar_sales_per_hour(name):
         with engine.connect() as con:
                 query = sql.text(
-                        "SELECT bar_name, EXTRACT(HOUR FROM A.time) as hour, SUM(total) FROM ( SELECT bar_name, total, time, orders.transaction_id as orders_id, transactions.transaction_id as transactions_id FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.bar_name = :name) A GROUP BY hour;"
+                        "SELECT bar_name, EXTRACT(HOUR FROM A.time) as hour, SUM(total) as total_per_hour FROM ( SELECT bar_name, total, time, orders.transaction_id as orders_id, transactions.transaction_id as transactions_id FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.bar_name = :name) A GROUP BY hour;"
                 )
                 rs = con.execute(query, name=name)
                 results = [dict(row) for row in rs]
