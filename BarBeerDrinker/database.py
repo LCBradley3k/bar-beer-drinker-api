@@ -151,6 +151,7 @@ def find_top_drinkers(name):
         return result
 
 # distribution of drinkers at bar per month
+'''
 def find_drinker_bars_per_hour(name):
         with engine.connect() as con:
                 query = sql.text(
@@ -161,6 +162,8 @@ def find_drinker_bars_per_hour(name):
                 for r in results:
                         r['total_per_month'] = float(r['total_per_month'])
                 return results
+'''
+
 
 #distribution of bar sales per month
 def find_beer_sales_per_month(name):
