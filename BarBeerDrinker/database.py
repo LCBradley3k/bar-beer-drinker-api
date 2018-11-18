@@ -150,7 +150,7 @@ def find_top_drinkers(name):
                 return None
         return result
 
-# distribution of drinkers at bar per hour
+# distribution of drinkers at bar per month
 def find_drinker_bars_per_hour(name):
         with engine.connect() as con:
                 query = sql.text(
@@ -160,6 +160,14 @@ def find_drinker_bars_per_hour(name):
                 results = [dict(row) for row in rs]
                 for r in results:
                         r['total_per_month'] = float(r['total_per_month'])
+                return results
+
+#distribution of bar sales per month
+def find_beer_sales_per_month(name):
+        with engine.connect() as con:
+                query = sql.text("SELECT beer, EXTRACT(MONTH FROM A.date) as month, COUNT(*) as beers_sold FROM ( SELECT beer, total, date, orders.transaction_id as orders_id, transactions.transaction_id as transactions_id FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.beer = :name) A GROUP BY month;")
+                rs = con.execute(query, name=name)
+                results = [dict(row) for row in rs]
                 return results
 
 #just name example, have to edit to fit our needs
