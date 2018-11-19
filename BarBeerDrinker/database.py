@@ -154,7 +154,7 @@ def find_top_drinkers(name):
 def find_drinker_bars_per_hour(name):
         with engine.connect() as con:
                 query = sql.text(
-                        "SELECT EXTRACT(MONTH FROM date) as month, orders.transaction_id, orders.name, orders.bar_name, SUM(total) as total_per_month FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.name = :name AND EXTRACT(MONTH FROM date) = '5' GROUP BY month, orders.bar_name ORDER BY month, transactions.date, transactions.time;"
+                        "SELECT EXTRACT(MONTH FROM date) as month, orders.transaction_id, orders.name, orders.bar_name, SUM(price) as total_per_month FROM orders INNER JOIN transactions ON orders.transaction_id = transactions.transaction_id WHERE orders.name = :name AND EXTRACT(MONTH FROM date) = '5' GROUP BY month, orders.bar_name ORDER BY month, transactions.date, transactions.time;"
                 )
                 rs = con.execute(query, name=name)
                 results = [dict(row) for row in rs]
