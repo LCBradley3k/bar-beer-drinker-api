@@ -167,7 +167,6 @@ def find_top_drinkers(name):
     except Exception as e:
         return make_response(str(e), 500)
 
-'''
 @app.route("/api/top-drinker-bars-per-hour/<name>", methods=["GET"])
 def find_drinker_bars_per_hour(name):
     try:
@@ -181,7 +180,6 @@ def find_drinker_bars_per_hour(name):
         return make_response(str(e), 400)
     except Exception as e:
         return make_response(str(e), 500)
-'''
 
 @app.route("/api/find-beer-sales-per-month/<name>", methods=["GET"])
 def find_beer_sales_per_month(name):
