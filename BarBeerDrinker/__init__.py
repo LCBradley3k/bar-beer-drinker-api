@@ -221,6 +221,25 @@ def verify_states():
 def verify_prices():
     return jsonify(database.verify_prices())
 
+## POST REQUESTS
+@app.route("/api/modification/insert", methods=["POST"])
+def insert():
+    body = json.loads(request.data)
+    query = body['query']
+    return jsonify(database.insert(query))
+
+@app.route("/api/modification/add", methods=["POST"])
+def add():
+    body = json.loads(request.data)
+    query = body['query']
+    return jsonify(database.add(query))
+
+@app.route("/api/modification/delete", methods=["POST"])
+def delete():
+    body = json.loads(request.data)
+    query = body['query']
+    return jsonify(database.delete(query))
+
 #find beers cheaper than given number
 #used when getting input from user
 @app.route("/api/beers_cheaper_than", methods=["POST"])

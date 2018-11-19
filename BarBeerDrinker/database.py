@@ -205,6 +205,19 @@ def verify_prices():
                 results = [dict(row) for row in rs]
                 return results
 
+# POST QUERIES
+def insert(query):
+        with engine.connect() as con:
+                query = sql.text(":query")
+
+def add(query):
+        with engine.connect() as con:
+                query = sql.text(":query")
+
+def delete(query):
+        with engine.connect() as con:
+                query = sql.text(":query")
+
 #just name example, have to edit to fit our needs
 def filter_beers(max_price):
         with engine.connect() as con:
