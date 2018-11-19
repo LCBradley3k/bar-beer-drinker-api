@@ -219,6 +219,10 @@ def verify_times():
 def verify_states():
     return jsonify(database.verify_states())
 
+@app.route("/api/verify_prices", methods=["GET"])
+def verify_prices():
+    return jsonify(database.verify_prices())
+
 #find beers cheaper than given number
 #used when getting input from user
 @app.route("/api/beers_cheaper_than", methods=["POST"])

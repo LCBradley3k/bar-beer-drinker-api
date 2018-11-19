@@ -200,6 +200,13 @@ def verify_states():
                 results = [dict(row) for row in rs]
                 return results
 
+def verify_prices():
+        with engine.connect() as con:
+                query = sql.text("SELECT NOT EXISTS(SELECT A.valid_price FROM(SELECT CASE WHEN(s1.price-s2.price = 0 OR s1.price-s2.price > 0 OR s1.price-s2.price < 0) THEN 'TRUE' else 'FALSE' END AS valid_price FROM sells_beer s1 JOIN sells_beer s2 WHERE (s1.beer != s2.beer) AND (s1.bar != s2.bar) ORDER BY s1.beer, s1.bar, s2.beer) AS A WHERE A.valid_price = 'False') AS check_prices;")
+                rs = con.execute(query)
+                results = [dict(row) for row in rs]
+                return results
+
 #just name example, have to edit to fit our needs
 def filter_beers(max_price):
         with engine.connect() as con:
